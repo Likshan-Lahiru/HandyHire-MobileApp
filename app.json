@@ -13,16 +13,25 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourname.handyhireapp",  // Add this line for iOS app identification
+      "buildNumber": "1.0.0"  // This could also help with your app versioning
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.yourname.handyhireapp",  // Add this line for Android app package identification
+      "versionCode": 1  // This helps with versioning for Android
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store"
+    ],
+    "scheme": "handyhireapp"  // Adding the scheme for deep linking
   }
 }

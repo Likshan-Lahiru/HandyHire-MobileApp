@@ -24,9 +24,9 @@ export default function TabsLayout() {
     },
 })}
 >
-    <Tabs.Screen name="index" options={{ title: "Home" }} />
-    <Tabs.Screen name="dashboard" options={{ title: "Dashboard" }} />
-    <Tabs.Screen name="profile" options={{ title: "Profile" }} />
+    <Tabs.Screen name="index" options={{ title: "Home",headerShown: false }} />
+    <Tabs.Screen name="dashboard" options={{ title: "Dashboard", headerShown: false }} />
+    <Tabs.Screen name="profile" options={{ title: "Profile", headerShown: false }} />
     </Tabs>
 );
 }
