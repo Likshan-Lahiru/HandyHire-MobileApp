@@ -1,35 +1,23 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import {View, Text, StyleSheet, FlatList} from "react-native";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../store/store";
+import {useEffect} from "react";
+import {getTools} from "../reducers/toolReducer";
 import ToolCard from "../components/toolCard";
 
 export default function HomeScreen() {
-    const [tools, setTools] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const dispatch = useDispatch<AppDispatch>();
+    const tools = useSelector((state: RootState) => state.tool);
 
     useEffect(() => {
-        const fetchTools = async () => {
-            try {
-                const response = await axios.get("http://localhost:8000/api/tools/get-all");
-                setTools(response.data);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchTools();
-    }, []);
+        if (!tools || tools.length === 0) {
+            dispatch(getTools());
+        }
+    }, [dispatch, tools]);
 
     return (
         <View style={styles.container}>
-            {loading ? (
-                <Text style={styles.loadingText}>Loading tools...</Text>
-            ) : error ? (
-                <Text style={styles.loadingText}>Error: {error}</Text>
-            ) : tools.length > 0 ? (
+            {tools && tools.length > 0 ? (
                 <FlatList
                     data={tools}
                     keyExtractor={(item, index) => index.toString()}
@@ -38,11 +26,12 @@ export default function HomeScreen() {
                     contentContainerStyle={styles.list}
                 />
             ) : (
-                <Text style={styles.loadingText}>No tools available</Text>
+                <Text style={styles.loadingText}>Loading tools...</Text>
             )}
         </View>
     );
 }
+
 
 const styles = StyleSheet.create({
     container: {

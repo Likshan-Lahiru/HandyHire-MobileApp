@@ -1,13 +1,23 @@
 import { Stack } from "expo-router";
-import {ClerkProvider} from "@clerk/clerk-expo";
-const PUBLISHABLE_KEY = "pk_test_aW5maW5pdGktcmFiYml0LTIwLmNsZXJrLmFjY291bnRzLmRldiQ";
+import { ClerkProvider } from "@clerk/clerk-expo";
+import { Provider } from "react-redux";
+import {store} from "./store/store";
+import {CartProvider} from "./components/context";
+
+
+const PUBLISHABLE_KEY = "pk_test_aW5maW5pdGUtcmFiYml0LTIwLmNsZXJrLmFjY291bnRzLmRldiQ";
 
 export default function RootLayout() {
     return (
-        <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="dashboard" />
-        </Stack>
-
+        <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+            <Provider store={store}>
+                <CartProvider>
+                    <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="(tabs)" />
+                    <Stack.Screen name="dashboard" />
+                </Stack>
+                </CartProvider>
+            </Provider>
+        </ClerkProvider>
     );
 }

@@ -10,23 +10,24 @@ export default function TabsLayout() {
     return (
         <Tabs
             screenOptions={({ route }) => ({
-        tabBarStyle: { position: "absolute", backgroundColor: "transparent" },
-        tabBarBackground: () => (
-            <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
-),
-    tabBarIcon: ({ color, size }) => {
-        let iconName;
-        if (route.name === "index") iconName = "home";
-        else if (route.name === "dashboard") iconName = "grid";
-        else if (route.name === "profile") iconName = "person";
+                tabBarStyle: { position: "absolute", backgroundColor: "transparent" },
+                tabBarBackground: () => (
+                    <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
+                ),
+                tabBarIcon: ({ color, size }) => {
+                    let iconName;
 
-        return <Ionicons name={iconName} size={size} color={color} />;
-    },
-})}
->
-    <Tabs.Screen name="index" options={{ title: "Home",headerShown: false }} />
-    <Tabs.Screen name="dashboard" options={{ title: "Dashboard", headerShown: false }} />
-    <Tabs.Screen name="profile" options={{ title: "Profile", headerShown: false }} />
-    </Tabs>
-);
+                    if (route.name === "index") iconName = "home";
+                    else if (route.name === "cart") iconName = "cart";
+                    else if (route.name === "profile") iconName = "person";
+
+                    return <Ionicons name={iconName} size={size} color={color} />;
+                },
+            })}
+        >
+            <Tabs.Screen name="index" options={{ title: "Home", headerShown: false }} />
+            <Tabs.Screen name="cart" options={{ title: "Cart", headerShown: false }} />
+            <Tabs.Screen name="profile" options={{ title: "Profile", headerShown: false }} />
+        </Tabs>
+    );
 }
